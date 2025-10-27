@@ -95,36 +95,52 @@ export default function SalesFlyer({ data }: SalesFlyerProps) {
   )
 }
 
-// 1ページ目コンポーネント
+// 1ページ目コンポーネント（サンプル画像スタイル）
 function Page1({ data }: { data: PropertyData }) {
+  const totalRent = data.rent + data.managementFee
+
   return (
     <div
-      className="border-2 border-gray-300 bg-white print:border-0"
+      className="border-2 border-gray-300 bg-white print:border-0 overflow-hidden"
       style={{ aspectRatio: '210/297', width: '100%' }}
     >
-      {/* ヘッダー */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4">
-        <div className="flex justify-between items-center">
+      {/* ヘッダー（黒背景） */}
+      <div className="bg-gray-900 text-white px-4 py-3">
+        <div className="grid grid-cols-3 items-center gap-4">
+          {/* 左: 物件名 */}
           <div>
-            <h1 className="text-2xl font-bold mb-1">{data.propertyName}</h1>
-            <p className="text-sm opacity-90">
-              {data.nearestStation} 徒歩{data.walkingMinutes}分
-            </p>
+            <h1 className="text-xl font-bold">{data.propertyName}</h1>
           </div>
+
+          {/* 中央: 交通情報 */}
+          <div className="text-center text-sm">
+            {data.nearestStation} 徒歩{data.walkingMinutes}分
+          </div>
+
+          {/* 右: 賃料（強調） */}
           <div className="text-right">
-            <div className="text-3xl font-bold">
-              {(data.rent + data.managementFee).toLocaleString()}
+            <div className="text-yellow-400 text-3xl font-bold">
+              {totalRent.toLocaleString()}
             </div>
-            <div className="text-sm">円/月</div>
+            <div className="text-xs text-white">円/月</div>
           </div>
+        </div>
+
+        {/* サブ情報 */}
+        <div className="mt-2 flex items-center gap-4 text-xs">
+          <span className="bg-white text-gray-900 px-2 py-0.5 rounded font-semibold">
+            {data.layout}
+          </span>
+          <span>{data.area}m²</span>
+          <span>築{data.buildingAge}年</span>
         </div>
       </div>
 
-      <div className="p-6 grid grid-cols-2 gap-6 h-[calc(100%-80px)]">
-        {/* 左側: 間取り図 */}
+      {/* メインコンテンツ */}
+      <div className="p-4 grid grid-cols-3 gap-4 h-[calc(100%-120px)]">
+        {/* 左1/3: 間取り図 */}
         <div className="flex flex-col">
-          <h3 className="font-bold text-sm mb-2 text-gray-700">間取り図</h3>
-          <div className="flex-1 border-2 border-gray-300 rounded bg-gray-50 flex items-center justify-center overflow-hidden">
+          <div className="flex-1 border-2 border-gray-300 bg-gray-50 flex items-center justify-center overflow-hidden">
             {data.images.floorPlan ? (
               <img
                 src={data.images.floorPlan.preview}
@@ -134,104 +150,80 @@ function Page1({ data }: { data: PropertyData }) {
             ) : (
               <div className="text-center text-gray-400">
                 <p className="text-sm">間取り図</p>
-                <p className="text-xs mt-1">画像を追加してください</p>
+                <p className="text-xs mt-1">画像を追加</p>
               </div>
             )}
-          </div>
-
-          {/* 基本情報 */}
-          <div className="mt-4 bg-blue-50 p-3 rounded text-sm space-y-2">
-            <div className="flex justify-between">
-              <span className="text-gray-600">間取り</span>
-              <span className="font-semibold">{data.layout}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">専有面積</span>
-              <span className="font-semibold">{data.area}m²</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">築年数</span>
-              <span className="font-semibold">築{data.buildingAge}年</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">構造</span>
-              <span className="font-semibold">{data.structure}</span>
-            </div>
           </div>
         </div>
 
-        {/* 右側: 写真と詳細情報 */}
-        <div className="flex flex-col space-y-3">
-          {/* 外観写真 */}
-          <div>
-            <h3 className="font-bold text-sm mb-2 text-gray-700">外観</h3>
-            {data.images.exterior.length > 0 ? (
-              <div className={`grid gap-2 ${data.images.exterior.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
-                {data.images.exterior.map((img) => (
-                  <div key={img.id} className="border-2 border-gray-300 rounded overflow-hidden aspect-video">
-                    <img
-                      src={img.preview}
-                      alt="外観"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
+        {/* 右2/3: 室内写真グリッド（2x2） + 地図 */}
+        <div className="col-span-2 flex flex-col gap-4">
+          {/* 室内写真 2x2グリッド */}
+          <div className="grid grid-cols-2 gap-3 flex-1">
+            {data.images.interior.slice(0, 4).map((img, index) => (
+              <div key={img.id} className="border border-gray-300 overflow-hidden bg-gray-50">
+                <img
+                  src={img.preview}
+                  alt={`室内${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
               </div>
-            ) : (
-              <div className="border-2 border-dashed border-gray-300 rounded aspect-video flex items-center justify-center">
-                <p className="text-xs text-gray-400">外観写真</p>
-              </div>
-            )}
-          </div>
-
-          {/* 室内写真（2枚まで表示） */}
-          <div className="flex-1">
-            <h3 className="font-bold text-sm mb-2 text-gray-700">室内</h3>
-            {data.images.interior.length > 0 ? (
-              <div className="grid grid-cols-2 gap-2 h-full">
-                {data.images.interior.slice(0, 2).map((img) => (
-                  <div key={img.id} className="border-2 border-gray-300 rounded overflow-hidden">
-                    <img
-                      src={img.preview}
-                      alt="室内"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-                {data.images.interior.length === 1 && (
-                  <div className="border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
-                    <p className="text-xs text-gray-400">室内写真</p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="border-2 border-dashed border-gray-300 rounded h-full flex items-center justify-center">
+            ))}
+            {/* 足りない場合はプレースホルダー */}
+            {Array.from({ length: Math.max(0, 4 - data.images.interior.length) }).map((_, i) => (
+              <div key={`placeholder-${i}`} className="border border-dashed border-gray-300 flex items-center justify-center bg-gray-50">
                 <p className="text-xs text-gray-400">室内写真</p>
               </div>
-            )}
+            ))}
           </div>
 
-          {/* 賃料情報 */}
-          <div className="bg-gray-50 p-3 rounded text-sm">
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <span className="text-gray-600 text-xs">賃料</span>
-                <p className="font-semibold">{data.rent.toLocaleString()}円</p>
+          {/* 地図 */}
+          <div className="h-32">
+            {data.images.map ? (
+              <div className="border border-gray-300 h-full overflow-hidden">
+                <img
+                  src={data.images.map.preview}
+                  alt="地図"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div>
-                <span className="text-gray-600 text-xs">管理費</span>
-                <p className="font-semibold">{data.managementFee.toLocaleString()}円</p>
+            ) : (
+              <div className="border border-dashed border-gray-300 h-full flex items-center justify-center bg-gray-50">
+                <p className="text-xs text-gray-400">地図</p>
               </div>
-              <div>
-                <span className="text-gray-600 text-xs">敷金</span>
-                <p className="font-semibold">{data.deposit.toLocaleString()}円</p>
-              </div>
-              <div>
-                <span className="text-gray-600 text-xs">礼金</span>
-                <p className="font-semibold">{data.keyMoney.toLocaleString()}円</p>
-              </div>
-            </div>
+            )}
           </div>
+        </div>
+      </div>
+
+      {/* フッター（物件詳細情報 - 黒背景）*/}
+      <div className="bg-gray-900 text-white px-4 py-3 text-xs">
+        <div className="grid grid-cols-4 gap-4">
+          <div>
+            <span className="text-gray-400">所在地</span>
+            <p className="font-semibold mt-0.5">{data.address}</p>
+          </div>
+          <div>
+            <span className="text-gray-400">賃料</span>
+            <p className="font-semibold mt-0.5">{data.rent.toLocaleString()}円</p>
+          </div>
+          <div>
+            <span className="text-gray-400">敷金/礼金</span>
+            <p className="font-semibold mt-0.5">
+              {data.deposit.toLocaleString()}円 / {data.keyMoney.toLocaleString()}円
+            </p>
+          </div>
+          <div>
+            <span className="text-gray-400">構造</span>
+            <p className="font-semibold mt-0.5">{data.structure} / {data.floor}</p>
+          </div>
+        </div>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {data.facilities.slice(0, 8).map((facility, index) => (
+            <span key={index} className="bg-gray-700 px-2 py-0.5 rounded text-xs">
+              {facility}
+            </span>
+          ))}
         </div>
       </div>
     </div>
