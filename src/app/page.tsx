@@ -1,16 +1,43 @@
+'use client'
+
+import { useState } from 'react'
+import PropertyForm from '@/components/PropertyForm'
+import MysokuPreview from '@/components/MysokuPreview'
+import { PropertyData, sampleProperty } from '@/types/property'
+
 export default function Home() {
+  const [propertyData, setPropertyData] = useState<PropertyData>(sampleProperty)
+
   return (
-    <main style={{ padding: '2rem' }}>
-      <h1>マイソクジェネレーター</h1>
-      <p>賃貸物件のマイソクを自動生成するアプリケーション</p>
-      <div style={{ marginTop: '2rem' }}>
-        <h2>開発予定機能</h2>
-        <ul>
-          <li>物件情報入力フォーム</li>
-          <li>マイソクテンプレート選択</li>
-          <li>PDF出力機能</li>
-          <li>画像配置・編集機能</li>
-        </ul>
+    <main className="min-h-screen py-8 px-4">
+      <div className="max-w-7xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800">マイソクジェネレーター</h1>
+          <p className="text-gray-600 mt-2">賃貸物件のマイソクを自動生成</p>
+        </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* 左側：入力フォーム */}
+          <div>
+            <PropertyForm data={propertyData} onChange={setPropertyData} />
+          </div>
+
+          {/* 右側：プレビュー */}
+          <div>
+            <MysokuPreview data={propertyData} />
+          </div>
+        </div>
+
+        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h2 className="font-bold text-blue-900 mb-2">今後の開発予定</h2>
+          <ul className="list-disc list-inside text-sm text-blue-800 space-y-1">
+            <li>設備項目の追加・削除機能</li>
+            <li>画像アップロード機能</li>
+            <li>複数テンプレート対応</li>
+            <li>PDF出力機能</li>
+            <li>データの保存・読み込み機能</li>
+          </ul>
+        </div>
       </div>
     </main>
   )
