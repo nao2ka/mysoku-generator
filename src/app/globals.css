@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 印刷用スタイル */
+@media print {
+  /* ページ設定 */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* 不要な要素を非表示 */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 販売図面のみ表示 */
+  #sales-flyer-page-1,
+  #sales-flyer-page-1 *,
+  #sales-flyer-page-2,
+  #sales-flyer-page-2 * {
+    visibility: visible;
+  }
+
+  /* ページ配置 */
+  #sales-flyer-page-1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  #sales-flyer-page-2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    page-break-before: always;
+    width: 100%;
+  }
+
+  /* 影やボーダーを削除 */
+  #sales-flyer-page-1 > div,
+  #sales-flyer-page-2 > div {
+    box-shadow: none !important;
+    border: none !important;
+  }
+}

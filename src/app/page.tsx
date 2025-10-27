@@ -28,19 +28,34 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h2 className="font-bold text-blue-900 mb-2">Phase 1 実装完了</h2>
+        <div className="mt-8 bg-green-50 border border-green-200 rounded-lg p-4">
+          <h2 className="font-bold text-green-900 mb-2">🎉 Phase 1 & 2 実装完了</h2>
+          <div className="grid md:grid-cols-2 gap-4 mt-3">
+            <div>
+              <h3 className="font-semibold text-green-800 mb-2">Phase 1: 画像処理</h3>
+              <ul className="list-disc list-inside text-sm text-green-700 space-y-1">
+                <li>✅ 画像アップロード機能</li>
+                <li>✅ ドラッグ&ドロップ対応</li>
+                <li>✅ 2ページレイアウト</li>
+                <li>✅ リアルタイムプレビュー</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-green-800 mb-2">Phase 2: PDF出力</h3>
+              <ul className="list-disc list-inside text-sm text-green-700 space-y-1">
+                <li>✅ PDF生成・ダウンロード</li>
+                <li>✅ 印刷機能</li>
+                <li>✅ 高画質出力</li>
+                <li>✅ A4サイズ最適化</li>
+              </ul>
+            </div>
+          </div>
+          <h3 className="font-bold text-blue-900 mb-2 mt-4">今後の開発予定（Phase 3以降）</h3>
           <ul className="list-disc list-inside text-sm text-blue-800 space-y-1">
-            <li>✅ 画像アップロード機能（ドラッグ&ドロップ対応）</li>
-            <li>✅ 2ページレイアウト対応</li>
-            <li>✅ 画像プレビュー表示</li>
-          </ul>
-          <h3 className="font-bold text-blue-900 mb-2 mt-4">今後の開発予定（Phase 2以降）</h3>
-          <ul className="list-disc list-inside text-sm text-blue-800 space-y-1">
-            <li>PDF出力機能</li>
-            <li>印刷最適化</li>
             <li>設備項目の追加・削除機能</li>
             <li>データの保存・読み込み機能</li>
+            <li>テンプレートの切り替え</li>
+            <li>画像の並び替え機能</li>
           </ul>
         </div>
       </div>
