@@ -9,7 +9,7 @@
 ## デプロイ状況
 
 - ホスティング: Vercel
-- プロジェクト名: mysoku-generator
+- プロジェクト名: sales-flyer-generator
 - デプロイ日時: 2025-10-27
 - ステータス: ✅ Ready (Production)
 
@@ -47,11 +47,23 @@ GitHubの `master` ブランチにpushすると、Vercelが自動的に検知し
 
 ## Vercelダッシュボード
 
-https://vercel.com/naoki-otsukas-projects/mysoku-generator
+https://vercel.com/naoki-otsukas-projects/sales-flyer-generator
+
+## 実装済み機能（Phase 1 & 2）
+
+✅ **Phase 1: 画像処理機能**
+- 画像アップロード（ドラッグ&ドロップ対応）
+- 間取り図、外観写真、室内写真、地図の管理
+- 2ページレイアウト
+- リアルタイムプレビュー
+
+✅ **Phase 2: PDF出力機能**
+- PDFダウンロード
+- 印刷機能
+- 高画質出力
+- A4サイズ最適化
 
 ## 注意事項
 
-- 現在はプロトタイプ版です
 - データは保存されません（ページをリロードすると初期状態に戻ります）
-- 画像アップロード機能は未実装です
-- PDF出力機能は未実装です
+- ブラウザ上で動作するため、インターネット接続が必要です

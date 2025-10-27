@@ -1,5 +1,5 @@
 {
-  "name": "mysoku-generator",
+  "name": "sales-flyer-generator",
   "version": "0.1.0",
   "description": "賃貸販売図面自動生成アプリ",
   "main": "index.js",

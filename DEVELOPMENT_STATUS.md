@@ -17,7 +17,7 @@
 
 ## リポジトリ
 
-https://github.com/nao2ka/mysoku-generator
+https://github.com/nao2ka/sales-flyer-generator
 
 ## 実装済み機能
 
