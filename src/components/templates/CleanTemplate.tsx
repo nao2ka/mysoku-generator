@@ -10,7 +10,7 @@ export default function CleanTemplate({ data }: CleanTemplateProps) {
   return (
     <div
       className="border-2 border-gray-200 bg-white print:border-0 overflow-hidden"
-      style={{ aspectRatio: '210/297', width: '100%' }}
+      style={{ aspectRatio: '297/210', width: '100%' }}
     >
       {/* ヘッダー（シンプルな白背景） */}
       <div className="bg-white border-b-4 border-blue-500 px-6 py-4">

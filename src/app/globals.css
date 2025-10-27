@@ -4,9 +4,9 @@
 
 /* 印刷用スタイル */
 @media print {
-  /* ページ設定 */
+  /* ページ設定（横A4） */
   @page {
-    size: A4;
+    size: A4 landscape;
     margin: 0;
   }
 

@@ -13,13 +13,13 @@ export async function generatePDF(
   fileName: string = '販売図面.pdf'
 ): Promise<void> {
   try {
-    // A4サイズの設定（mm）
-    const a4Width = 210
-    const a4Height = 297
+    // A4横サイズの設定（mm）
+    const a4Width = 297  // 横
+    const a4Height = 210 // 縦
 
-    // PDFドキュメントを作成
+    // PDFドキュメントを作成（横向き）
     const pdf = new jsPDF({
-      orientation: 'portrait',
+      orientation: 'landscape',
       unit: 'mm',
       format: 'a4',
     })

@@ -10,7 +10,7 @@ export default function InformationTemplate({ data }: InformationTemplateProps) 
   return (
     <div
       className="border-2 border-gray-300 bg-white print:border-0 overflow-hidden"
-      style={{ aspectRatio: '210/297', width: '100%' }}
+      style={{ aspectRatio: '297/210', width: '100%' }}
     >
       {/* ヘッダー */}
       <div className="bg-gray-800 text-white px-4 py-3">

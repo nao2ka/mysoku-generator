@@ -10,7 +10,7 @@ export default function PremiumTemplate({ data }: PremiumTemplateProps) {
   return (
     <div
       className="border-2 border-gray-300 bg-white print:border-0 overflow-hidden"
-      style={{ aspectRatio: '210/297', width: '100%' }}
+      style={{ aspectRatio: '297/210', width: '100%' }}
     >
       {/* ヘッダー（黒背景） */}
       <div className="bg-gray-900 text-white px-4 py-3">
