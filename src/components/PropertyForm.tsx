@@ -1,6 +1,8 @@
 'use client'
 
-import { PropertyData } from '@/types/property'
+import { PropertyData, PropertyImage } from '@/types/property'
+import SingleImageUpload from './SingleImageUpload'
+import ImageUpload from './ImageUpload'
 
 interface PropertyFormProps {
   data: PropertyData
@@ -10,6 +12,19 @@ interface PropertyFormProps {
 export default function PropertyForm({ data, onChange }: PropertyFormProps) {
   const handleChange = (field: keyof PropertyData, value: any) => {
     onChange({ ...data, [field]: value })
+  }
+
+  const handleImageChange = (
+    category: keyof PropertyData['images'],
+    value: PropertyImage | PropertyImage[] | null
+  ) => {
+    onChange({
+      ...data,
+      images: {
+        ...data.images,
+        [category]: value,
+      },
+    })
   }
 
   return (
@@ -194,6 +209,41 @@ export default function PropertyForm({ data, onChange }: PropertyFormProps) {
             />
           </div>
         </div>
+      </div>
+
+      {/* 画像アップロード */}
+      <div className="space-y-4">
+        <h3 className="font-semibold text-gray-700 border-b pb-2">画像</h3>
+
+        {/* 間取り図 */}
+        <SingleImageUpload
+          title="間取り図"
+          image={data.images.floorPlan}
+          onImageChange={(img) => handleImageChange('floorPlan', img)}
+        />
+
+        {/* 外観写真 */}
+        <ImageUpload
+          title="外観写真"
+          images={data.images.exterior}
+          maxImages={2}
+          onImagesChange={(imgs) => handleImageChange('exterior', imgs)}
+        />
+
+        {/* 室内写真 */}
+        <ImageUpload
+          title="室内写真"
+          images={data.images.interior}
+          maxImages={6}
+          onImagesChange={(imgs) => handleImageChange('interior', imgs)}
+        />
+
+        {/* 地図 */}
+        <SingleImageUpload
+          title="地図（オプション）"
+          image={data.images.map}
+          onImageChange={(img) => handleImageChange('map', img)}
+        />
       </div>
     </div>
   )

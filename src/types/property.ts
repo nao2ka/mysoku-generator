@@ -1,5 +1,13 @@
 // 物件情報の型定義
 
+// 画像データの型
+export interface PropertyImage {
+  id: string // 一意のID
+  file: File | null // アップロードされたファイル
+  preview: string // プレビュー用のDataURL
+  caption?: string // キャプション（オプション）
+}
+
 export interface PropertyData {
   // 基本情報
   propertyName: string
@@ -23,11 +31,12 @@ export interface PropertyData {
   // 設備
   facilities: string[]
 
-  // 画像URL
-  images?: {
-    exterior?: string
-    interior?: string[]
-    floorPlan?: string
+  // 画像
+  images: {
+    floorPlan: PropertyImage | null // 間取り図
+    exterior: PropertyImage[] // 外観写真（1～2枚）
+    interior: PropertyImage[] // 室内写真（4～6枚）
+    map: PropertyImage | null // 地図（オプション）
   }
 
   // その他
@@ -56,5 +65,11 @@ export const sampleProperty: PropertyData = {
     '宅配ボックス',
     '駐輪場',
   ],
+  images: {
+    floorPlan: null,
+    exterior: [],
+    interior: [],
+    map: null,
+  },
   notes: '角部屋につき日当たり良好',
 }
