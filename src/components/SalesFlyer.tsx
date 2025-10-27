@@ -3,6 +3,10 @@
 import { useState } from 'react'
 import { PropertyData } from '@/types/property'
 import { generatePDF, printPreview } from '@/utils/pdfGenerator'
+import { TemplateType, templates } from '@/types/template'
+import PremiumTemplate from './templates/PremiumTemplate'
+import CleanTemplate from './templates/CleanTemplate'
+import InformationTemplate from './templates/InformationTemplate'
 
 interface SalesFlyerProps {
   data: PropertyData
@@ -10,6 +14,7 @@ interface SalesFlyerProps {
 
 export default function SalesFlyer({ data }: SalesFlyerProps) {
   const [isGenerating, setIsGenerating] = useState(false)
+  const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>('premium')
 
   const handlePDFDownload = async () => {
     setIsGenerating(true)
@@ -29,6 +34,20 @@ export default function SalesFlyer({ data }: SalesFlyerProps) {
       alert('PDF生成中にエラーが発生しました')
     } finally {
       setIsGenerating(false)
+    }
+  }
+
+  // テンプレート選択に応じたコンポーネントを返す
+  const renderTemplate = () => {
+    switch (selectedTemplate) {
+      case 'premium':
+        return <PremiumTemplate data={data} />
+      case 'clean':
+        return <CleanTemplate data={data} />
+      case 'information':
+        return <InformationTemplate data={data} />
+      default:
+        return <PremiumTemplate data={data} />
     }
   }
 
@@ -73,10 +92,32 @@ export default function SalesFlyer({ data }: SalesFlyerProps) {
         </div>
       </div>
 
+      {/* テンプレート選択 */}
+      <div className="border-t pt-4">
+        <h3 className="text-sm font-semibold text-gray-700 mb-3">デザインテンプレート</h3>
+        <div className="grid grid-cols-3 gap-4">
+          {templates.map((template) => (
+            <button
+              key={template.id}
+              onClick={() => setSelectedTemplate(template.id)}
+              className={`p-4 border-2 rounded-lg text-left transition-all ${
+                selectedTemplate === template.id
+                  ? 'border-blue-500 bg-blue-50'
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <div className="font-semibold text-sm mb-1">{template.name}</div>
+              <div className="text-xs text-gray-500 mb-2">{template.theme}</div>
+              <div className="text-xs text-gray-600">{template.description}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="space-y-8">
         {/* 1ページ目 */}
         <div id="sales-flyer-page-1">
-          <Page1 data={data} />
+          {renderTemplate()}
         </div>
 
         {/* ページ区切り */}
