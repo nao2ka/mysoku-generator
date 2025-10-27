@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'マイソクジェネレーター',
-  description: '賃貸物件のマイソクを自動生成',
+  title: '販売図面ジェネレーター',
+  description: '賃貸物件の販売図面を自動生成',
 }
 
 export default function RootLayout({

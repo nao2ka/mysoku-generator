@@ -12,8 +12,8 @@ export default function Home() {
     <main className="min-h-screen py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">マイソクジェネレーター</h1>
-          <p className="text-gray-600 mt-2">賃貸物件のマイソクを自動生成</p>
+          <h1 className="text-3xl font-bold text-gray-800">販売図面ジェネレーター</h1>
+          <p className="text-gray-600 mt-2">賃貸物件の販売図面を自動生成</p>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

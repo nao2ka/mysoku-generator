@@ -9,7 +9,7 @@ interface MysokuPreviewProps {
 export default function MysokuPreview({ data }: MysokuPreviewProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-8 space-y-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-6">マイソクプレビュー</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-6">販売図面プレビュー</h2>
 
       {/* A4サイズを想定した領域 */}
       <div className="border-2 border-gray-300 p-6 bg-white" style={{ aspectRatio: '210/297' }}>
@@ -129,7 +129,7 @@ export default function MysokuPreview({ data }: MysokuPreviewProps) {
       </div>
 
       <div className="text-sm text-gray-500 text-center">
-        ※ このプレビューは実際のマイソクのイメージです
+        ※ このプレビューは実際の販売図面のイメージです
       </div>
     </div>
   )
